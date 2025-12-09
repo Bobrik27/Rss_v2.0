@@ -1,16 +1,136 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="Главная">
+	
+	<!-- Навигация (сделал шире для больших экранов) -->
+	<nav class="fixed w-full z-50 backdrop-blur-md bg-brand-bg/80 border-b border-white/5">
+		<div class="max-w-[1800px] mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+			<a href="/" class="flex items-center gap-3 group">
+				<img src="/logo.svg" alt="Logo" class="w-10 h-10 transition transform group-hover:scale-110 duration-300" />
+				<span class="font-bold text-2xl tracking-tight">Run Swift <span class="text-brand-accent">Studio</span></span>
+			</a>
+			
+			<div class="hidden md:flex gap-10 text-base font-medium text-brand-muted">
+				<a href="#services" class="hover:text-white transition hover:translate-y-px">Услуги</a>
+				<a href="#cases" class="hover:text-white transition hover:translate-y-px">Кейсы</a>
+				<a href="/blog" class="hover:text-white transition hover:translate-y-px">Блог</a>
+				<a href="/news" class="flex items-center gap-2 hover:text-brand-accent transition hover:translate-y-px">
+					<span class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
+					IT Новости
+				</a>
+			</div>
+
+			<a href="https://t.me/tvoj_bot" target="_blank" class="hidden sm:block bg-white/5 hover:bg-white/10 text-white px-6 py-3 rounded-xl text-sm font-medium transition border border-white/10 hover:border-brand-accent/50">
+				Заказать бота
+			</a>
+		</div>
+	</nav>
+
+	<main>
+		<!-- Hero Section -->
+		<section class="relative pt-40 pb-32 overflow-hidden min-h-screen flex items-center">
+			
+			<!-- Фоновые эффекты -->
+			<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1400px] h-[800px] bg-brand-accent/10 blur-[150px] rounded-full pointer-events-none opacity-40"></div>
+			<div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+
+			<!-- Контейнер расширен до 1800px для больших мониторов -->
+			<div class="relative z-10 max-w-[1800px] mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-20 items-center">
+				
+				<!-- Левая часть: Текст (Увеличен шрифт) -->
+				<div class="space-y-10">
+					<div class="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-sm font-semibold tracking-wide uppercase">
+						<span class="relative flex h-2.5 w-2.5">
+						  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
+						  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-accent"></span>
+						</span>
+						Automate Everything
+					</div>
+					
+					<!-- Адаптивный шрифт: на 2xl экранах будет огромным -->
+					<h1 class="text-5xl lg:text-7xl 2xl:text-8xl font-bold leading-tight tracking-tight">
+						Скорость <br/>
+						<span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-accent to-purple-500">твоего бизнеса</span>
+					</h1>
+					
+					<p class="text-xl 2xl:text-2xl text-brand-muted max-w-2xl leading-relaxed">
+						Замените рутину на умных Telegram-ботов. Интегрируем CRM, AI и платежи в единый механизм. Работает 24/7, не просит зарплату.
+					</p>
+					
+					<div class="flex flex-col sm:flex-row gap-5 pt-4">
+						<a href="#contacts" class="bg-brand-accent hover:bg-brand-accentHover text-white px-10 py-5 rounded-2xl font-bold text-xl shadow-xl shadow-brand-accent/20 transition transform hover:-translate-y-1 text-center">
+							Обсудить проект
+						</a>
+						<a href="#portfolio" class="px-10 py-5 rounded-2xl font-bold text-xl border border-white/10 hover:bg-white/5 transition flex items-center justify-center gap-3 group">
+							Кейсы <span class="group-hover:translate-x-1 transition">→</span>
+						</a>
+					</div>
+				</div>
+
+				<!-- Правая часть: Визуализация (Node Graph вернулся!) -->
+				<div class="relative hidden lg:block h-[500px] 2xl:h-[600px] w-full">
+					<!-- Карточка-контейнер -->
+					<div class="absolute inset-0 bg-brand-surface/50 border border-white/10 rounded-3xl backdrop-blur-xl shadow-2xl p-8 transform rotate-2 hover:rotate-0 transition duration-700">
+						
+						<!-- Fake Browser UI -->
+						<div class="flex items-center gap-3 mb-6 border-b border-white/5 pb-4">
+							<div class="flex gap-2">
+								<div class="w-3 h-3 rounded-full bg-red-500/50"></div>
+								<div class="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+								<div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+							</div>
+							<div class="text-xs text-brand-muted font-mono ml-4">n8n_workflow_v2.json</div>
+						</div>
+
+						<!-- Canvas для нод -->
+						<div class="relative w-full h-full flex items-center justify-center">
+							
+							<!-- SVG Линии (Связи) -->
+							<svg class="absolute inset-0 w-full h-full pointer-events-none drop-shadow-[0_0_10px_rgba(255,109,90,0.5)]">
+								<!-- Линия от Telegram к AI -->
+								<path d="M120 100 C 120 100, 250 100, 250 180" stroke="#334155" stroke-width="3" fill="none" class="animate-pulse-slow"/>
+								<!-- Линия от AI к CRM -->
+								<path d="M250 180 C 250 180, 400 260, 450 260" stroke="#334155" stroke-width="3" fill="none"/>
+								<!-- Линия от AI к Google Sheets -->
+								<path d="M250 180 C 250 180, 400 100, 450 100" stroke="#334155" stroke-width="3" fill="none"/>
+							</svg>
+
+							<!-- Node 1: Telegram (Слева сверху) -->
+							<div class="absolute top-10 left-10 bg-[#24A1DE] p-4 rounded-2xl shadow-lg shadow-blue-500/20 flex items-center gap-3 w-48 border border-white/10 z-10 hover:scale-105 transition">
+								<div class="bg-white/20 p-2 rounded-lg"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg></div>
+								<div>
+									<div class="text-white font-bold text-sm">Telegram</div>
+									<div class="text-blue-100 text-xs">New Message</div>
+								</div>
+							</div>
+
+							<!-- Node 2: AI Logic (Центр) -->
+							<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-accent p-5 rounded-2xl shadow-2xl shadow-brand-accent/30 flex items-center gap-3 w-52 border border-white/10 z-20 hover:scale-110 transition duration-300">
+								<div class="bg-white/20 p-2 rounded-lg"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></div>
+								<div>
+									<div class="text-white font-bold text-base">AI Processing</div>
+									<div class="text-orange-100 text-xs">Gemini 1.5 Pro</div>
+								</div>
+							</div>
+
+							<!-- Node 3: Sheets (Справа сверху) -->
+							<div class="absolute top-10 right-10 bg-[#1DA462] p-4 rounded-2xl shadow-lg shadow-green-500/20 flex items-center gap-3 w-48 border border-white/10 z-10 hover:scale-105 transition">
+								<div class="bg-white/20 p-2 rounded-lg"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+								<div class="text-white font-bold text-sm">Google Sheets</div>
+							</div>
+
+							 <!-- Node 4: CRM (Справа снизу) -->
+							 <div class="absolute bottom-10 right-10 bg-[#0052CC] p-4 rounded-2xl shadow-lg shadow-blue-700/20 flex items-center gap-3 w-48 border border-white/10 z-10 hover:scale-105 transition">
+								<div class="bg-white/20 p-2 rounded-lg"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div>
+								<div class="text-white font-bold text-sm">AmoCRM</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</section>
+	</main>
+</Layout>

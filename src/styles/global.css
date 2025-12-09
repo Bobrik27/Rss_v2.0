@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@theme {
+  /* Наши фирменные цвета */
+  --color-brand-bg: #0f172a;
+  --color-brand-surface: #1e293b;
+  --color-brand-accent: #ff6d5a;
+  --color-brand-accentHover: #e65540;
+  --color-brand-text: #f8fafc;
+  --color-brand-muted: #94a3b8;
+  --color-brand-border: #334155;
+
+  /* Шрифты */
+  --font-sans: "Inter", sans-serif;
+  
+  /* Анимации */
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Глобальные настройки */
+body {
+  @apply bg-brand-bg text-brand-text;
+}
