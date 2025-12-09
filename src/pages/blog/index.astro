@@ -1,0 +1,69 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post: CollectionEntry<'blog'>) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a: CollectionEntry<'blog'>, b: CollectionEntry<'blog'>) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+
+<Layout title="Блог">
+  <div class="max-w-[1800px] mx-auto px-6 lg:px-12 py-24">
+    <header class="mb-16 text-center">
+      <h1 class="text-4xl md:text-6xl font-bold mb-6">Блог Run Swift Studio</h1>
+      <p class="text-xl text-brand-muted max-w-2xl mx-auto">
+        Полезные статьи о Telegram-ботах, автоматизации бизнеса и современных технологиях
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {sortedPosts.map((post: CollectionEntry<'blog'>) => (
+        <article class="bg-brand-surface/50 border border-white/10 rounded-2xl overflow-hidden hover:transform hover:scale-105 transition-all duration-300 backdrop-blur-sm">
+          {post.data.image && (
+            <img 
+              src={post.data.image} 
+              alt={post.data.title}
+              class="w-full h-48 object-cover"
+            />
+          )}
+          <div class="p-6">
+            <div class="flex justify-between items-start mb-3">
+              <time datetime={post.data.pubDate.toISOString()} class="text-sm text-brand-muted">
+                {post.data.pubDate.toLocaleDateString('ru-RU')}
+              </time>
+              {post.data.readTime && (
+                <span class="text-sm bg-brand-accent/20 text-brand-accent px-2 py-1 rounded">
+                  {post.data.readTime}
+                </span>
+              )}
+            </div>
+            
+            <h2 class="text-xl font-bold mb-3">{post.data.title}</h2>
+            <p class="text-brand-muted mb-4">{post.data.description}</p>
+            
+            <div class="flex flex-wrap gap-2 mb-4">
+              {post.data.tags?.map((tag: string) => (
+                <span class="text-xs bg-white/10 text-brand-accent px-2 py-1 rounded">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+            
+            {post.data.author && (
+              <div class="text-sm text-brand-muted">
+                Автор: {post.data.author}
+              </div>
+            )}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</Layout>
