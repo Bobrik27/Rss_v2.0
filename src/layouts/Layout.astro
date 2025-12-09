@@ -1,45 +1,67 @@
 ---
-import '../styles/global.css';  /* <--- ВОТ ЭТУ СТРОКУ */
+import '../styles/global.css';
+
 interface Props {
 	title: string;
+	description?: string;
 }
 
-const { title } = Astro.props;
+const { title, description = "Разработка Telegram ботов и автоматизация бизнеса" } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="ru" class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Разработка Telegram ботов и автоматизация бизнеса" />
+		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/logo.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title} | Run Swift Studio</title>
 		
-		<!-- Подключаем шрифт Inter -->
+		<!-- Font Inter -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	</head>
-	<body class="bg-brand-bg text-brand-text font-sans antialiased selection:bg-brand-accent selection:text-white">
-		<slot /> 
+	<body class="bg-brand-bg text-brand-text font-sans antialiased selection:bg-brand-accent selection:text-white flex flex-col min-h-screen">
+		
+		<!-- ГЛОБАЛЬНЫЙ ХЕДЕР (ВСЕГДА СВЕРХУ) -->
+		<nav class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-brand-bg/80 border-b border-white/5 transition-all duration-300">
+			<div class="max-w-[1800px] mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+				<!-- Логотип (Ведет на главную) -->
+				<a href="/" class="flex items-center gap-3 group">
+					<img src="/logo.svg" alt="Logo" class="w-10 h-10 transition transform group-hover:scale-110 duration-300" />
+					<span class="font-bold text-2xl tracking-tight hidden sm:block">Run Swift <span class="text-brand-accent">Studio</span></span>
+				</a>
+				
+				<!-- Меню -->
+				<div class="hidden md:flex gap-10 text-base font-medium text-brand-muted">
+					<a href="/#services" class="hover:text-white transition hover:translate-y-px">Услуги</a>
+					<a href="/#cases" class="hover:text-white transition hover:translate-y-px">Кейсы</a>
+					<a href="/blog" class="hover:text-white transition hover:translate-y-px">Блог</a>
+					<a href="/news" class="flex items-center gap-2 hover:text-brand-accent transition hover:translate-y-px">
+						<span class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
+						IT Новости
+					</a>
+				</div>
+	
+				<!-- Кнопка -->
+				<a href="https://t.me/tvoj_bot" target="_blank" class="hidden sm:block bg-white/5 hover:bg-white/10 text-white px-6 py-2.5 rounded-xl text-sm font-medium transition border border-white/10 hover:border-brand-accent/50">
+					Заказать бота
+				</a>
+			</div>
+		</nav>
+
+		<!-- Отступ, чтобы контент не прятался под хедером на внутренних страницах -->
+		<!-- На главной у нас свой отступ в Hero секции, поэтому здесь делаем хитро -->
+		<div class="flex-grow">
+			<slot />
+		</div>
+
+		<!-- ФУТЕР (Можно добавить позже) -->
+		<footer class="py-8 text-center text-brand-muted text-sm border-t border-white/5 mt-auto">
+			© 2025 Run Swift Studio. Automate Everything.
+		</footer>
 	</body>
 </html>
-
-<style is:global>
-	/* Глобальные стили для скроллбара */
-	::-webkit-scrollbar {
-		width: 10px;
-	}
-	::-webkit-scrollbar-track {
-		background: #0f172a;
-	}
-	::-webkit-scrollbar-thumb {
-		background: #334155;
-		border-radius: 5px;
-	}
-	::-webkit-scrollbar-thumb:hover {
-		background: #475569;
-	}
-</style>
