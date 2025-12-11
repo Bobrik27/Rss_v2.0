@@ -1,25 +1,27 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import GravityHero from '../components/GravityHero.jsx';
 import AboutBento from '../components/AboutBento.astro';
+import HeroOldFinalWithComets from '../components/HeroOldFinalWithComets.jsx';
 ---
 
 <Layout title="Главная">
 
 	<main>
+	<HeroOldFinalWithComets client:load />
+	
 		<!-- Hero Section -->
 		<section class="relative pt-40 pb-32 overflow-hidden min-h-screen flex items-center">
 			
 			<!-- Фоновые эффекты -->
 			<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1400px] h-[800px] bg-brand-accent/10 blur-[150px] rounded-full pointer-events-none opacity-40"></div>
-			<div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+			<div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-15 mix-blend-overlay"></div>
 
 			<!-- Контейнер расширен до 1800px для больших мониторов -->
 			<div class="relative z-10 max-w-[1800px] mx-auto px-6 lg:px-12 grid lg:grid-cols-2 gap-20 items-center">
 				
 				<!-- Левая часть: Текст (Увеличен шрифт) -->
 				<div class="space-y-10">
-					<div class="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-sm font-semibold tracking-wide uppercase">
+					<div class="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-brand-accent/10 border-brand-accent/20 text-brand-accent text-sm font-semibold tracking-wide uppercase">
 						<span class="relative flex h-2.5 w-2.5">
 						  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75"></span>
 						  <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-accent"></span>
@@ -61,7 +63,7 @@ import AboutBento from '../components/AboutBento.astro';
 							</div>
 							<div class="text-xs text-brand-muted font-mono ml-4">n8n_workflow_v2.json</div>
 						</div>
-
+ 
 						<!-- Canvas для нод -->
 						<div class="relative w-full h-full flex items-center justify-center">
 							
@@ -74,7 +76,7 @@ import AboutBento from '../components/AboutBento.astro';
 								<!-- Линия от AI к Google Sheets -->
 								<path d="M250 180 C 250 180, 400 100, 450 100" stroke="#334155" stroke-width="3" fill="none"/>
 							</svg>
-
+ 
 							<!-- Node 1: Telegram (Слева сверху) -->
 							<div class="absolute top-10 left-10 bg-[#24A1DE] p-4 rounded-2xl shadow-lg shadow-blue-500/20 flex items-center gap-3 w-48 border border-white/10 z-10 hover:scale-105 transition">
 								<div class="bg-white/20 p-2 rounded-lg"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg></div>
@@ -83,22 +85,22 @@ import AboutBento from '../components/AboutBento.astro';
 									<div class="text-blue-100 text-xs">New Message</div>
 								</div>
 							</div>
-
+ 
 							<!-- Node 2: AI Logic (Центр) -->
-							<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-accent p-5 rounded-2xl shadow-2xl shadow-brand-accent/30 flex items-center gap-3 w-52 border border-white/10 z-20 hover:scale-110 transition duration-300">
+							<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-accent p-5 rounded-2xl shadow-brand-accent/30 flex items-center gap-3 w-52 border border-white/10 z-20 hover:scale-110 transition duration-300">
 								<div class="bg-white/20 p-2 rounded-lg"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg></div>
 								<div>
 									<div class="text-white font-bold text-base">AI Processing</div>
 									<div class="text-orange-100 text-xs">Gemini 1.5 Pro</div>
 								</div>
 							</div>
-
+ 
 							<!-- Node 3: Sheets (Справа сверху) -->
 							<div class="absolute top-10 right-10 bg-[#1DA462] p-4 rounded-2xl shadow-lg shadow-green-500/20 flex items-center gap-3 w-48 border border-white/10 z-10 hover:scale-105 transition">
-								<div class="bg-white/20 p-2 rounded-lg"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+								<div class="bg-white/20 p-2 rounded-lg"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
 								<div class="text-white font-bold text-sm">Google Sheets</div>
 							</div>
-
+ 
 							 <!-- Node 4: CRM (Справа снизу) -->
 							 <div class="absolute bottom-10 right-10 bg-[#0052CC] p-4 rounded-2xl shadow-lg shadow-blue-700/20 flex items-center gap-3 w-48 border border-white/10 z-10 hover:scale-105 transition">
 								<div class="bg-white/20 p-2 rounded-lg"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div>
