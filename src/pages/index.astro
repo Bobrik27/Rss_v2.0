@@ -1,16 +1,22 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import AboutBento from '../components/AboutBento.astro';
-import HeroOldFinalWithComets from '../components/HeroOldFinalWithComets.jsx';
+// Убедись, что файл называется именно так в папке components
+import LegacyHero from '../components/LegacyHero.jsx';
 ---
 
 <Layout title="Главная">
 
-	<main>
-	<HeroOldFinalWithComets client:load />
+	<main class="bg-brand-bg"> <!-- Общий фон для подстраховки -->
 	
-		<!-- Hero Section -->
-		<section class="relative pt-40 pb-32 overflow-hidden min-h-screen flex items-center">
+	<!-- 1. НОВЫЙ ЭКРАН (Кометы + Буквы) -->
+	<div class="relative z-10">
+		<LegacyHero client:load />
+	</div>
+	
+		<!-- 2. СТАРЫЙ БЛОК (Сдвинут вниз) -->
+		<!-- ВАЖНО: z-20, -mt-1 и bg-brand-bg убирают линии стыков -->
+		<section class="relative z-20 -mt-1 bg-brand-bg pt-20 pb-32 overflow-hidden min-h-screen flex items-center">
 			
 			<!-- Фоновые эффекты -->
 			<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1400px] h-[800px] bg-brand-accent/10 blur-[150px] rounded-full pointer-events-none opacity-40"></div>
@@ -97,7 +103,7 @@ import HeroOldFinalWithComets from '../components/HeroOldFinalWithComets.jsx';
  
 							<!-- Node 3: Sheets (Справа сверху) -->
 							<div class="absolute top-10 right-10 bg-[#1DA462] p-4 rounded-2xl shadow-lg shadow-green-500/20 flex items-center gap-3 w-48 border border-white/10 z-10 hover:scale-105 transition">
-								<div class="bg-white/20 p-2 rounded-lg"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+								<div class="bg-white/20 p-2 rounded-lg"><svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
 								<div class="text-white font-bold text-sm">Google Sheets</div>
 							</div>
  
@@ -113,6 +119,10 @@ import HeroOldFinalWithComets from '../components/HeroOldFinalWithComets.jsx';
 			</div>
 		</section>
 		
-		<AboutBento />
+		<!-- 3. BENTO GRID -->
+		<!-- Тоже накрываем z-20 и фоном -->
+		<div class="relative z-20 bg-brand-bg">
+			<AboutBento />
+		</div>
 	</main>
 </Layout>
