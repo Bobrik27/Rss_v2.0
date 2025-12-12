@@ -2,7 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import AboutBento from '../components/AboutBento.astro';
 // Убедись, что файл называется именно так в папке components
-import LegacyHero from '../components/LegacyHero.jsx';
+import OldProjectHero from '../components/OldProjectHero.jsx';
 ---
 
 <Layout title="Главная">
@@ -11,7 +11,7 @@ import LegacyHero from '../components/LegacyHero.jsx';
 	
 	<!-- 1. НОВЫЙ ЭКРАН (Кометы + Буквы) -->
 	<div class="relative z-10">
-		<LegacyHero client:load />
+		<OldProjectHero client:load />
 	</div>
 	
 		<!-- 2. СТАРЫЙ БЛОК (Сдвинут вниз) -->
