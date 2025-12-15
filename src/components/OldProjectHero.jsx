@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const OldProjectHero = () => {
+const LegacyHero = () => {
   const heroSectionRef = useRef(null);
   const titleRef = useRef(null);
   const canvasRef = useRef(null);
@@ -20,7 +20,6 @@ const OldProjectHero = () => {
 
     // --- NETWORK АНИМАЦИЯ (КОМЕТЫ) ---
     const ctx = canvas.getContext('2d');
-    let animationFrameId;
     let points = [];
     let activeLines = [];
     let activeExplosions = [];
@@ -218,7 +217,7 @@ const OldProjectHero = () => {
             ctx.beginPath();
             ctx.arc(headX, headY, headRadius, 0, Math.PI * 2);
             // Head fill style uses the comet's color, possibly slightly more opaque
-            ctx.fillStyle = this.color.replace(/, [\d.]+\)/, `, ${Math.min(1, baseColorAlpha + 0.2)})`);
+            ctx.fillStyle = this.color.replace(/, ([\d.]+)\)/, `, ${Math.min(1, baseColorAlpha + 0.2)})`);
             ctx.fill();
         }
     }
@@ -416,9 +415,9 @@ const OldProjectHero = () => {
             // or the animation might look jittery on scrub.
             // For simplicity here, we'll calculate them on each update, but for production, consider storing.
 
-            const randomY = 300 + Math.random() * 200; // Fall distance (pixels)
-            const randomX = (Math.random() - 0.5) * 150; // Horizontal drift (pixels)
-            const randomRotation = (Math.random() - 0.5) * 120; // Rotation (degrees)
+            const randomYValue = 300 + Math.random() * 200; // Fall distance (pixels)
+            const randomXValue = (Math.random() - 0.5) * 150; // Horizontal drift (pixels)
+            const randomRotationValue = (Math.random() - 0.5) * 120; // Rotation (degrees)
             const randomDelayFactor = Math.random() * 0.6; // To make letters start falling at slightly different times
 
             // Calculate the actual animation progress for this letter based on scroll progress and random delay
@@ -435,9 +434,9 @@ const OldProjectHero = () => {
             // - X translation and Rotation apply
 
             gsap.to(letter, {
-              y: letterFallProgress * randomY,
-              x: letterFallProgress * randomX,
-              rotation: letterFallProgress * randomRotation,
+              y: letterFallProgress * randomYValue,
+              x: letterFallProgress * randomXValue,
+              rotation: letterFallProgress * randomRotationValue,
               opacity: 1 - letterFallProgress, // Fade out as it falls
               duration: 0.1, // Short duration for immediate response to scrub
               ease: "power1.out", // Makes the start of the fall a bit quicker
@@ -455,12 +454,6 @@ const OldProjectHero = () => {
         }
       });
     }
-
-    // Cleanup
-    return () => {
-      window.removeEventListener('resize', resizeCanvas);
-      cancelAnimationFrame(animationFrameId);
-    };
   }, []);
 
   return (
@@ -540,4 +533,4 @@ const OldProjectHero = () => {
   );
 };
 
-export default OldProjectHero;
+export default LegacyHero;
