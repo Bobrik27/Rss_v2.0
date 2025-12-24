@@ -1,11 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import AboutBento from '../components/AboutBento.astro';
 import WorkflowVisual from '../components/WorkflowVisual.astro';
+import Competencies from '../components/Competencies.astro';
+import Solutions from '../components/Solutions.astro';
+import Approach from '../components/Approach.astro';
 // Джун назвал компонент комет так, используем его
 import OldProjectHero from '../components/OldProjectHero.jsx'; 
 ---
-
+  
 <Layout title="Главная">
 
 	<main class="bg-brand-bg">
@@ -63,9 +65,11 @@ import OldProjectHero from '../components/OldProjectHero.jsx';
 			</div>
 		</section>
 		
-		<!-- 3. BENTO GRID -->
+		<!-- 3. NEW SECTIONS -->
 		<div class="relative z-20 bg-brand-bg">
-			<AboutBento />
+			<Competencies />
+			<Solutions />
+			<Approach />
 		</div>
 	</main>
 </Layout>
