@@ -377,16 +377,17 @@ return (
         <div className="hero-content absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10">
           <div className="layer__header">
             <h1 ref={titleRef} 
-                className={`layers__title text-6xl md:text-8xl lg:text-[10rem] font-black text-center leading-none transition-colors duration-300 ${isDark ? 'text-white' : 'text-slate-900'}`}
+                className={`layers__title text-6xl md:text-8xl lg:text-[10rem] font-black text-center leading-none transition-colors duration-300 ${isDark ? 'text-foreground' : 'text-slate-900'}`}
                 style={{
                   fontFamily: '"Inter", sans-serif',
-                  // Свечение для Dark Mode
+                  // Свечение: Сделал мягче (меньше радиус, меньше прозрачность)
                   textShadow: isDark 
-                    ? '0 0 40px rgba(34, 211, 238, 0.4), 0 0 10px rgba(255, 255, 255, 0.8)' 
+                    ? '0 0 25px rgba(34, 211, 238, 0.3), 0 0 5px rgba(255, 255, 255, 0.5)' 
                     : 'none',
                   letterSpacing: 'normal',
                   fontWeight: 900,
-                  WebkitTextStroke: isDark ? '1px rgba(255, 255, 255, 0.5)' : '0px',
+                  // Убрал обводку, чтобы буквы были чище и совпадали по стилю с остальным сайтом
+                  WebkitTextStroke: '0px',
                   textTransform: 'uppercase',
                   lineHeight: 1.05,
                   whiteSpace: 'nowrap',
