@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import ThemeToggle from '../components/ThemeToggle';
 
 interface Props {
 	title: string;
@@ -24,32 +25,35 @@ const { title, description = "Разработка Telegram ботов и авт
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	</head>
-	<body class="bg-brand-bg text-brand-text font-sans antialiased selection:bg-brand-accent selection:text-white flex flex-col min-h-screen">
+	<body class="bg-background text-foreground font-sans antialiased selection:bg-primary selection:text-primary-foreground flex flex-col min-h-screen">
 		
 		<!-- ГЛОБАЛЬНЫЙ ХЕДЕР (ВСЕГДА СВЕРХУ) -->
-		<nav class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-brand-bg/80 border-b border-white/5 transition-all duration-300">
+		<nav class="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-background/80 border-b border-border transition-all duration-30">
 			<div class="max-w-[1800px] mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
 				<!-- Логотип (Ведет на главную) -->
 				<a href="/" class="flex items-center gap-3 group">
 					<img src="/logo.svg" alt="Logo" class="w-10 h-10 transition transform group-hover:scale-110 duration-300" />
-					<span class="font-bold text-2xl tracking-tight hidden sm:block">Run Swift <span class="text-brand-accent">Studio</span></span>
+					<span class="font-bold text-2xl tracking-tight hidden sm:block">Run Swift <span class="text-primary">Studio</span></span>
 				</a>
 				
 				<!-- Меню -->
-				<div class="hidden md:flex gap-10 text-base font-medium text-brand-muted">
-					<a href="/#services" class="hover:text-white transition hover:translate-y-px">Услуги</a>
-					<a href="/#cases" class="hover:text-white transition hover:translate-y-px">Кейсы</a>
-					<a href="/blog" class="hover:text-white transition hover:translate-y-px">Блог</a>
-					<a href="/news" class="flex items-center gap-2 hover:text-brand-accent transition hover:translate-y-px">
-						<span class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
+				<div class="hidden md:flex gap-10 text-base font-medium text-muted-foreground">
+					<a href="/#services" class="hover:text-foreground transition hover:translate-y-px">Услуги</a>
+					<a href="/#cases" class="hover:text-foreground transition hover:translate-y-px">Кейсы</a>
+					<a href="/blog" class="hover:text-foreground transition hover:translate-y-px">Блог</a>
+					<a href="/news" class="flex items-center gap-2 hover:text-primary transition hover:translate-y-px">
+						<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
 						IT Новости
 					</a>
 				</div>
 	
-				<!-- Кнопка -->
-				<a href="https://t.me/tvoj_bot" target="_blank" class="hidden sm:block bg-white/5 hover:bg-white/10 text-white px-6 py-2.5 rounded-xl text-sm font-medium transition border border-white/10 hover:border-brand-accent/50">
-					Заказать бота
-				</a>
+				<!-- Кнопка и тема -->
+				<div class="flex items-center gap-3">
+					<ThemeToggle client:only="react" />
+					<a href="https://t.me/tvoj_bot" target="_blank" class="hidden sm:block bg-muted hover:bg-muted/80 text-foreground px-6 py-2.5 rounded-xl text-sm font-medium transition border border-border hover:border-primary/50">
+						Заказать бота
+					</a>
+				</div>
 			</div>
 		</nav>
 
@@ -60,7 +64,7 @@ const { title, description = "Разработка Telegram ботов и авт
 		</div>
 
 		<!-- ФУТЕР (Можно добавить позже) -->
-		<footer class="py-8 text-center text-brand-muted text-sm border-t border-white/5 mt-auto">
+		<footer class="py-8 text-center text-muted-foreground text-sm border-t border-border mt-auto">
 			© 2025 Run Swift Studio. Automate Everything.
 		</footer>
 	</body>

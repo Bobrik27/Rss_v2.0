@@ -12,12 +12,12 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
     
     <!-- Заголовок раздела -->
     <header class="mb-20 text-center space-y-4 animate-fade-in">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 text-brand-accent text-xs font-semibold tracking-wide uppercase">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border-primary/20 text-primary text-xs font-semibold tracking-wide uppercase">
         <span class="w-2 h-2 rounded-full bg-brand-accent"></span>
         Knowledge Base
       </div>
       <h1 class="text-4xl md:text-6xl font-bold">
-        Блог <span class="text-brand-accent">Run Swift</span>
+        Блог <span class="text-primary">Run Swift</span>
       </h1>
       <p class="text-xl text-brand-muted max-w-2xl mx-auto">
         Инструкции, кейсы и новости из мира автоматизации.
@@ -29,11 +29,11 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
       {sortedPosts.map((post, index) => (
         <a 
           href={`/blog/${post.slug}`}
-          class="group relative flex flex-col bg-brand-surface/50 border border-white/10 rounded-2xl overflow-hidden hover:border-brand-accent/50 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-accent/10 hover:-translate-y-2 animate-card"
+          class="group relative flex flex-col bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2 animate-card"
           style={`animation-delay: ${index * 150}ms`}
         >
           <!-- Картинка -->
-          <div class="aspect-video overflow-hidden bg-brand-bg relative">
+          <div class="aspect-video overflow-hidden bg-background relative">
             {post.data.image ? (
               <img 
                 src={post.data.image} 
@@ -42,7 +42,7 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
               />
             ) : (
               // Заглушка, если нет картинки
-              <div class="w-full h-full flex items-center justify-center bg-brand-surface">
+              <div class="w-full h-full flex items-center justify-center bg-card">
                  <img src="/logo.svg" class="w-12 h-12 opacity-20" />
               </div>
             )}
@@ -59,7 +59,7 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
 
           <!-- Контент -->
           <div class="p-6 flex flex-col flex-grow">
-            <div class="flex justify-between items-center mb-3 text-xs text-brand-muted font-medium">
+            <div class="flex justify-between items-center mb-3 text-xs text-muted-foreground font-medium">
               <time datetime={post.data.pubDate.toISOString()}>
                 {post.data.pubDate.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })}
               </time>
@@ -71,15 +71,15 @@ const sortedPosts = posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDa
               )}
             </div>
             
-            <h2 class="text-xl font-bold mb-3 leading-tight group-hover:text-brand-accent transition-colors">
+            <h2 class="text-xl font-bold mb-3 leading-tight group-hover:text-primary transition-colors">
               {post.data.title}
             </h2>
             
-            <p class="text-brand-muted text-sm line-clamp-3 mb-4 flex-grow">
+            <p class="text-muted-foreground text-sm line-clamp-3 mb-4 flex-grow">
               {post.data.description}
             </p>
             
-            <div class="flex items-center gap-2 text-sm font-bold text-white mt-auto group-hover:translate-x-2 transition-transform duration-300">
+            <div class="flex items-center gap-2 text-sm font-bold text-foreground mt-auto group-hover:translate-x-2 transition-transform duration-300">
               Читать статью 
               <svg class="w-4 h-4 text-brand-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
             </div>

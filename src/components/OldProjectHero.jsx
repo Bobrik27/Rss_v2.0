@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 const LegacyHero = () => {
   const heroSectionRef = useRef(null);
   const titleRef = useRef(null);
-  const canvasRef = useRef(null);
+ const canvasRef = useRef(null);
 
   useEffect(() => {
     const titleElement = titleRef.current;
@@ -248,7 +248,7 @@ const LegacyHero = () => {
         if (pointColorAlphaMatch) {
             pointColorAlpha = parseFloat(pointColorAlphaMatch[1]);
         } else if (networkSettings.pointColor && !networkSettings.pointColor.includes('rgba')) {
-            // If it's a solid color string like 'red' or '#FF0000', assume visible unless explicitly transparent
+            // If it's a solid color string like 'red' or '#FF000', assume visible unless explicitly transparent
             pointColorAlpha = 1;
         }
 
@@ -401,7 +401,7 @@ const LegacyHero = () => {
         trigger: heroSection,       // Element that triggers the animation
         start: "top top",           // When the top of heroSection hits the top of the viewport
         end: '+=100px',          // Animation will be active while heroSection is scrolling out
-        // Or a fixed distance like "+=300" or "+=50%"
+        // Or a fixed distance like "+=30" or "+=50%"
         scrub: 0.5,                 // Smooth scrubbing effect (0.5 to 2 is usually good)
         // markers: true,           // Uncomment for debugging trigger positions
 
@@ -456,13 +456,13 @@ const LegacyHero = () => {
     }
   }, []);
 
-  return (
-    <header ref={heroSectionRef} className="hero-section h-screen bg-[#0f172a] overflow-hidden relative">
+ return (
+    <header ref={heroSectionRef} className="hero-section h-screen bg-transparent overflow-hidden relative">
       {/* Canvas для комет */}
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full z-0" />
 
       <div className="parallax-viewport absolute inset-0">
-        <div className="parallax-layer layer-far absolute inset-0 bg-[radial-gradient(circle_at_1px,rgba(133,141,148,0.1)_0.5px,transparent_0)] bg-[length:35px_35px]"></div>
+        <div className="parallax-layer layer-far absolute inset-0 bg-[radial-gradient(circle_at_1px,rgba(13,141,148,0.1)_0.5px,transparent_0)] bg-[length:35px_35px]"></div>
 
         <div className="parallax-layer layer-mid absolute inset-0">
         </div>
@@ -470,14 +470,13 @@ const LegacyHero = () => {
 
         <div className="hero-content absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10">
           <div className="layer__header">
-            <h1 ref={titleRef} className="layers__title text-6xl md:text-8xl lg:text-[10rem] font-black text-white text-center leading-none"
+            <h1 ref={titleRef} className="layers__title text-6xl md:text-8xl lg:text-[10rem] font-black text-slate-900 dark:text-white transition-colors duration-300 dark:drop-shadow-[0_0_25px_rgba(255,255,255,0.5)] text-center leading-none"
                 style={{
                   fontFamily: '"Inter", sans-serif',
-                  textShadow: '0 0 40px rgba(255, 109, 90, 0.4), 0 0 10px rgba(255, 255, 255, 0.8)',
                   // Эти стили повторяют логику из main.css для .hero-section .layers__title
                   letterSpacing: 'normal',
                   fontWeight: 900,
-                  WebkitTextStroke: '1px rgba(255, 255, 255, 0.5)', // Добавляем обводку для увеличения толщины
+                  WebkitTextStroke: '1px rgba(0, 0, 0, 0.2) dark:1px rgba(255, 255, 255, 0.5)', // Добавляем обводку для увеличения толщины
                   textTransform: 'uppercase',
                   lineHeight: 1.05,
                   whiteSpace: 'nowrap',
@@ -486,7 +485,7 @@ const LegacyHero = () => {
               {/* Буквы генерируются JS */}
             </h1>
           </div>
-          <p className="hero-subtitle mt-8 text-brand-muted uppercase tracking-[0.5em] text-sm animate-pulse">
+          <p className="hero-subtitle mt-8 text-slate-600 dark:text-gray-400 tracking-[0.5em] text-xs md:text-sm uppercase font-medium transition-colors duration-300 animate-pulse">
             Современные решения для вашего бизнеса
           </p>
 

@@ -12,14 +12,14 @@ const sortedNews = news.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate
     
     <!-- Заголовок раздела -->
     <header class="mb-16 text-center space-y-4 animate-fade-in">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold tracking-wide uppercase">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold tracking-wide uppercase">
         <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
         Live Feed
       </div>
       <h1 class="text-4xl md:text-6xl font-bold">
         IT <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Новости</span>
       </h1>
-      <p class="text-xl text-brand-muted max-w-2xl mx-auto">
+      <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
         Актуальные события из мира AI, Telegram и автоматизации.
       </p>
     </header>
@@ -29,7 +29,7 @@ const sortedNews = news.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate
       {sortedNews.map((item, index) => (
         <a 
           href={`/news/${item.slug}`}
-          class="group relative flex flex-col bg-brand-surface/30 border border-white/5 rounded-xl overflow-hidden hover:border-blue-500/30 transition-all duration-300 hover:bg-brand-surface hover:-translate-y-1 animate-card"
+          class="group relative flex flex-col bg-card border border-border rounded-xl overflow-hidden hover:border-primary/30 transition-all duration-300 hover:bg-card hover:-translate-y-1 animate-card"
           style={`animation-delay: ${index * 100}ms`}
         >
           <!-- Картинка (если есть) -->
@@ -40,13 +40,13 @@ const sortedNews = news.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate
                 alt={item.data.title}
                 class="w-full h-full object-cover transition duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-brand-surface to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-card to-transparent"></div>
             </div>
           )}
 
           <div class="p-5 flex flex-col flex-grow relative">
             <!-- Дата и Источник -->
-            <div class="flex justify-between items-center mb-3 text-xs text-brand-muted">
+            <div class="flex justify-between items-center mb-3 text-xs text-muted-foreground">
               <time datetime={item.data.pubDate.toISOString()}>
                 {item.data.pubDate.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' })}
               </time>
@@ -60,18 +60,18 @@ const sortedNews = news.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate
               )}
             </div>
 
-            <h2 class="text-lg font-bold mb-3 leading-snug group-hover:text-blue-400 transition-colors">
+            <h2 class="text-lg font-bold mb-3 leading-snug group-hover:text-primary transition-colors">
               {item.data.title}
             </h2>
 
-            <p class="text-sm text-brand-muted line-clamp-3 mb-4 flex-grow">
+            <p class="text-sm text-muted-foreground line-clamp-3 mb-4 flex-grow">
               {item.data.description}
             </p>
 
             <!-- Теги -->
             <div class="flex flex-wrap gap-2 mt-auto">
               {item.data.tags?.slice(0, 3).map((tag: string) => (
-                <span class="text-[10px] uppercase font-bold bg-white/5 text-brand-muted px-2 py-1 rounded border border-white/5 group-hover:border-blue-500/20 group-hover:text-blue-300 transition-colors">
+                <span class="text-[10px] uppercase font-bold bg-white/5 text-muted-foreground px-2 py-1 rounded border border-white/5 group-hover:border-primary/20 group-hover:text-primary transition-colors">
                   #{tag}
                 </span>
               ))}
