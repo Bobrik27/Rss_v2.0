@@ -2,30 +2,32 @@ import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-gsap.registerPlugin(ScrollTrigger);
+// Регистрируем плагин (проверка на window для SSR)
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const LegacyHero = () => {
   const heroSectionRef = useRef(null);
   const titleRef = useRef(null);
   const canvasRef = useRef(null);
-  
-  // Состояние темы (по умолчанию dark)
+
+  // --- ТОЛЬКО ЭТО ДОБАВЛЕНО: Состояние для смены цветов ---
   const [isDark, setIsDark] = useState(true);
 
-  // 1. Следим за темой через MutationObserver
   useEffect(() => {
+    // Функция проверки темы
     const checkTheme = () => {
       const theme = document.documentElement.getAttribute('data-theme');
-      setIsDark(theme === 'dark' || !theme); // Если атрибута нет или dark — считаем темной
+      setIsDark(theme === 'dark' || !theme);
     };
     
-    checkTheme(); // Проверка при старте
-
+    checkTheme();
     const observer = new MutationObserver(checkTheme);
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-
     return () => observer.disconnect();
   }, []);
+  // ---------------------------------------------------------
 
   useEffect(() => {
     const titleElement = titleRef.current;
@@ -36,37 +38,26 @@ const LegacyHero = () => {
       return;
     }
 
+    // --- НИЖЕ ВЕСЬ ТВОЙ ОРИГИНАЛЬНЫЙ КОД БЕЗ ИЗМЕНЕНИЙ ---
     // --- NETWORK АНИМАЦИЯ (КОМЕТЫ) ---
     const ctx = canvas.getContext('2d');
     let points = [];
     let activeLines = [];
     let activeExplosions = [];
 
-    // Настройка цветов в зависимости от темы
-    // Для темной темы (isDark = true): оставляем оригинальные яркие цвета
-    // Для светлой темы (isDark = false): делаем кометы темными, чтобы их было видно на белом
-    const cometColors = isDark 
-      ? [
-          'rgba(255, 127, 80, 0.8)', // Orange
-          'rgba(66, 181, 239, 0.7)', // Blue
-          'rgba(219, 35, 239, 0.7)', // Pink
-          'rgba(234, 234, 234, 0.6)'  // White
-        ]
-      : [
-          'rgba(15, 23, 42, 0.8)',   // Dark Slate
-          'rgba(37, 99, 235, 0.7)',  // Dark Blue
-          'rgba(79, 70, 229, 0.7)',  // Indigo
-          'rgba(51, 65, 85, 0.6)'    // Slate 700
-        ];
-
     // --- Network Settings ---
     const networkSettings = {
-        numPoints: 800,
-        pointRadius: 1.5,
+        numPoints: 800, 
+        pointRadius: 1.5, 
         pointColor: 'rgba(133, 141, 148, 0)', 
         connectDistance: 500, 
-        lineColors: cometColors, // Используем динамические цвета
-        lineWidthStart: 2.5,
+        lineColors: [
+            'rgba(255, 127, 80, 0.8)', // --accent-bright
+            'rgba(66, 181, 239, 0.7)', // --accent-warm
+            'rgba(219, 35, 239, 0.7)',
+            'rgba(234, 234, 234, 0.6)'  // --text-color
+        ],
+        lineWidthStart: 2.5, 
         cometTailLength: 7.35, 
         lineAnimationDuration: 2.8, 
         explosionMaxRadiusFactor: 20, 
@@ -158,7 +149,6 @@ const LegacyHero = () => {
 
             const dx = this.p2.x - this.p1.x;
             const dy = this.p2.y - this.p1.y;
-
             const headX = this.p1.x + dx * this.headProgress;
             const headY = this.p1.y + dy * this.headProgress;
             const tailStartX = this.p1.x + dx * this.tailStartProgress;
@@ -318,11 +308,13 @@ const LegacyHero = () => {
 
     // --- 3. Exit Animation: Letters "Falling" on Scroll ---
     if (letters.length > 0 && typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      
       ScrollTrigger.create({
         trigger: heroSection,       
         start: "top top",           
         end: '+=100px',          
         scrub: 0.5,                 
+        
         onUpdate: (self) => {
           letters.forEach((letter, i) => {
             const randomYValue = 300 + Math.random() * 200; 
@@ -353,20 +345,20 @@ const LegacyHero = () => {
       });
     }
 
-    // CLEANUP при смене темы или размонтировании
+    // Добавлен простой Cleanup, чтобы не дублировалось при HMR
     return () => {
         gsap.ticker.remove(updateNetwork);
         ScrollTrigger.getAll().forEach(t => t.kill());
         window.removeEventListener('resize', resizeCanvas);
     };
 
-  }, [isDark]); // ПЕРЕЗАПУСК ПРИ СМЕНЕ ТЕМЫ
+  }, []); // Оставляем пустой массив, чтобы логика не перезапускалась
 
-return (
-    // ИСПРАВЛЕНИЕ: Используем bg-background (системный цвет) вместо жесткого #0f172a
+  return (
+    // ИЗМЕНЕНИЕ: Динамический класс фона
     <header 
         ref={heroSectionRef} 
-        className={`hero-section h-screen overflow-hidden relative transition-colors duration-500 ${isDark ? 'bg-background' : 'bg-slate-50'}`}
+        className={`hero-section h-screen overflow-hidden relative transition-colors duration-500 ${isDark ? 'bg-[#0f172a]' : 'bg-slate-50'}`}
     >
       <canvas ref={canvasRef} className="absolute inset-0 w-full h-full z-0" />
 
@@ -375,19 +367,20 @@ return (
         <div className="parallax-layer layer-mid absolute inset-0"></div>
 
         <div className="hero-content absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10">
-          <div className="layer__header">
+          <div className="layer__header px-4">
+            {/* ИЗМЕНЕНИЕ: Динамический цвет текста и свечение */}
             <h1 ref={titleRef} 
-                className={`layers__title text-6xl md:text-8xl lg:text-[10rem] font-black text-center leading-none transition-colors duration-300 ${isDark ? 'text-foreground' : 'text-slate-900'}`}
+                className={`layers__title text-6xl md:text-8xl lg:text-[10rem] font-black text-center leading-none transition-colors duration-300 ${isDark ? 'text-white' : 'text-slate-900'}`}
                 style={{
                   fontFamily: '"Inter", sans-serif',
-                  // Свечение: Сделал мягче (меньше радиус, меньше прозрачность)
+                  // Свечение: включаем только если isDark
                   textShadow: isDark 
-                    ? '0 0 25px rgba(34, 211, 238, 0.3), 0 0 5px rgba(255, 255, 255, 0.5)' 
+                    ? '0 0 40px rgba(255, 109, 90, 0.4), 0 0 10px rgba(255, 255, 255, 0.8)' 
                     : 'none',
                   letterSpacing: 'normal',
                   fontWeight: 900,
-                  // Убрал обводку, чтобы буквы были чище и совпадали по стилю с остальным сайтом
-                  WebkitTextStroke: '0px',
+                  // Обводка: включаем только если isDark
+                  WebkitTextStroke: isDark ? '1px rgba(255, 255, 255, 0.5)' : '0px',
                   textTransform: 'uppercase',
                   lineHeight: 1.05,
                   whiteSpace: 'nowrap',
@@ -396,9 +389,11 @@ return (
               {/* Буквы генерируются JS */}
             </h1>
           </div>
-          <p className={`hero-subtitle mt-8 uppercase tracking-[0.5em] text-sm animate-pulse ${isDark ? 'text-brand-muted' : 'text-slate-500'}`}>
+          {/* ИЗМЕНЕНИЕ: Динамический цвет подзаголовка */}
+          <p className={`hero-subtitle mt-8 uppercase tracking-[0.5em] text-sm animate-pulse transition-colors duration-300 ${isDark ? 'text-brand-muted' : 'text-slate-500'}`}>
             Современные решения для вашего бизнеса
           </p>
+
         </div>
 
         <div className="parallax-layer layer-near absolute inset-0"></div>

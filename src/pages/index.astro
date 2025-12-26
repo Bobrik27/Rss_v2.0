@@ -1,35 +1,28 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import OldProjectHero from '../components/OldProjectHero.jsx'; 
+import LegacyHero from '../components/LegacyHero.jsx'; 
 import CompetenciesSection from '../components/sections/CompetenciesSection';
 import SolutionsSection from '../components/sections/SolutionsSection';
 import ApproachSection from '../components/sections/ApproachSection';
 import ContactSection from '../components/sections/ContactSection';
 ---
 
-<Layout title="Главная">
-	<html data-theme="dark">
-	<head>
-		<script>
-			// Set default theme to dark
-			document.documentElement.setAttribute('data-theme', 'dark');
-			localStorage.setItem('theme', 'dark');
-		</script>
-	</head>
-	<main class="bg-background">
+<Layout title="Run Swift Studio | Автоматизация бизнеса">
+	<main class="bg-background min-h-screen">
 	
-	<!-- 1. HERO (КОМЕТЫ + БУКВЫ) -->
-	<div class="relative z-10">
-		<OldProjectHero client:load />
-	</div>
+		<!-- 1. HERO (КОМЕТЫ + БУКВЫ) -->
+		<div class="relative z-10">
+			<!-- Используем новый оптимизированный компонент -->
+			<LegacyHero client:load />
+		</div>
 	
-		<!-- 2. NEW SECTIONS -->
+		<!-- 2. MAIN SECTIONS -->
 		<div class="relative z-20 bg-background">
 			<CompetenciesSection client:visible />
 			<SolutionsSection client:visible />
 			<ApproachSection client:visible />
 			<ContactSection client:visible />
 		</div>
+		
 	</main>
-	</html>
 </Layout>
