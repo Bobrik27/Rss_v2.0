@@ -1,43 +1,48 @@
-# Astro Starter Kit: Minimal
+# Run Swift Studio — сайт-портфолио v2.0
+
+> Ранняя версия сайта студии автоматизации: показать компетенции, объяснить услуги и привести посетителя к обсуждению проекта.
+
+## Зачем создавался проект
+
+Сайт задумывался как витрина Run Swift Studio: разработка автоматизаций на n8n, AI-ассистентов и Telegram-решений, работа с backend и инфраструктурой. Это сайт о предлагаемых услугах; сами AI-сервисы реализуются отдельно.
+
+**RSS в названии означает Run Swift Studio. Это не агрегатор RSS-лент.**
+
+## Что есть в коде
+
+- Лендинг с первым экраном и анимациями.
+- Разделы компетенций, решений, подхода и контактов.
+- Коллекции блога и новостей на Markdown.
+- Компоненты темизации.
+- Несколько вариантов первого экрана и визуальных эффектов.
+
+## Где что искать
+
+| Путь | Содержимое |
+|---|---|
+| `src/pages/index.astro` | Сборка главной страницы. |
+| `src/components/` | Компоненты лендинга и анимаций. |
+| `src/data/portfolioData.ts` | Тексты о компетенциях, услугах и подходе. |
+| `src/content/` | Материалы блога и новостей. |
+| `src/layouts/` | Общий макет страниц. |
+
+## Стек и локальный запуск
+
+**Astro, React, TypeScript, Tailwind CSS.**
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+`npm run build` собирает сайт, `npm run preview` открывает локальный просмотр сборки. Эти команды описывают стандартный сценарий проекта; свежая сборка в рамках оформления README не выполнялась.
 
-## 🚀 Project Structure
+## Место среди версий
 
-Inside of your Astro project, you'll see the following folders and files:
+| Версия | Назначение |
+|---|---|
+| **Этот репозиторий: v2.0** | Ранняя витрина услуг с основными разделами, блогом и новостями. |
+| [Rss_v2.2](https://github.com/Bobrik27/Rss_v2.2) | Эксперименты с анимациями, темами и языковыми маршрутами. |
+| [Rss_v2.3](https://github.com/Bobrik27/Rss_v2.3) | Более развитый лендинг и интерфейс WB Audit. |
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Это историческая версия сайта. В контенте сохранены тестовые публикации; для актуального представления студии сначала стоит посмотреть v2.3.
